@@ -1,7 +1,7 @@
 name: golang-pipeline
 on: push
 env:
-  REGISTRY: gcr.io
+  REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   TAG: ${{ github.sha }}
 jobs:
