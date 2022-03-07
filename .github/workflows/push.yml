@@ -3,7 +3,7 @@ on: push
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  TAG: ${{ github.sha }}
+  TAG: ${GITHUB_SHA::8}
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
