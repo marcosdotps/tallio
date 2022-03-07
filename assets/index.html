@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <!--- The other stuff in the head tag here... -->
+    </head>
+    <body style="background-color:#87CEEB;" ontouchstart="countTouches(event)" onclick="countMe(event)">
+            <div id="circle">
+                <div id="circle-inner"><span id="tally">0</span></div>
+            </div>
+    </body>
+</html>
+
+<style>
+    #circle {
+        background: rgb(26, 23, 23);
+        border-radius: 50%;
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+    }
+    #circle-inner {
+        background: rgb(44, 38, 38);
+        border-radius: 50%;
+        width: 285px;
+        height: 285px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+    }
+    #tally {
+        color: rgb(255,255,255);
+        font-size: 50px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<script>
+    var clicks = 0;
+    function countMe(event) {
+      clicks++
+      document.getElementById("tally").innerHTML = clicks;
+    }
+</script>
