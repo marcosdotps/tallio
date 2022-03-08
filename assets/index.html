@@ -7,6 +7,9 @@
             <div id="circle">
                 <div id="circle-inner"><span id="tally">0</span></div>
             </div>
+            <div id="reset">
+                <button type="button" class="btn btn-primary" id="button" onclick="reset()">Reset</button>
+            </div>
     </body>
 </html>
 
@@ -42,6 +45,27 @@
         margin-right: -50%;
         transform: translate(-50%, -50%);
     }
+    #reset {
+        color: rgb(0, 0, 0);
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+    }
+    #button {
+        background: rgba(0, 0, 0, 0.452);
+        color: rgb(255, 255, 255);
+        border-radius: 5px;
+        border: 1px solid rgb(255, 255, 255);
+        width: 100px;
+        height: 50px;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+    }
 </style>
 
 <script>
@@ -49,5 +73,10 @@
     function countMe(event) {
       clicks++
       document.getElementById("tally").innerHTML = clicks;
+    }
+    function reset(){
+        //This value is set to -1 to ensure that the counter resets to 0 when the reset button is clicked.
+        clicks = -1;
+        document.getElementById("tally").innerHTML = clicks;
     }
 </script>
