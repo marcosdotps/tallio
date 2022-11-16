@@ -2,7 +2,7 @@ module github.com/marcosdotps/tallio
 
 go 1.17
 
-require github.com/labstack/echo/v4 v4.7.0
+require github.com/labstack/echo/v4 v4.9.0
 
 require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
