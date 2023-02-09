@@ -1,0 +1,72 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  commit-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print commit message
+        run: echo ${{ github.event.pull_request.title }}
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: go build -o main .
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Unit Tests
+        run: go test ./... -v -timeout 10s -cover
+  codeql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: go
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v1
+  package:
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get short SHA
+        id: slug
+        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+  deploy-staging:
+  #simulate that we deploy to staging printing a message
+    runs-on: ubuntu-latest
+    needs:
+      - package
+    steps:
+      - name: Deploy to staging
+        run: echo "Deploying to staging"
+      - name: Testing the deployed version
+        run: echo "Testing the deployed version"
+      - name: Check SLI performance
+        run: echo "Checking SLI performance"
+      ## If SLI performance is not good, we can rollback to the previous version
+      - name: Rollback to previous version
+        run: echo "Rolling back to previous version"
+  monitoring-staging:
+  #simulate that we monitor the deployed version printing a message
+    runs-on: ubuntu-latest
+    needs:
+      - deploy-staging
+    steps:
+      - name: Monitoring the deployed version
+        run: echo "Monitoring the deployed version"
